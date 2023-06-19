@@ -29,16 +29,16 @@ x3_exp = []
 with open(file1) as f: #sintaksa za otvaranje datoteka
     for line in f:
         row = line.split(",")
-        t_exp.append(float(row[0]))
         xb_exp.append((float(row[1])-7)/1000)
         x1_exp.append((float(row[2])-float(row[1]))/1000)
         x2_exp.append((float(row[3])-float(row[1]))/1000)
 
 # Odabir podataka ovisno o ispitivanju
 if file2 == "mjerenje2_pomak_x.csv":
-    with open(file1) as f: #sintaksa za otvaranje datoteka
+    with open(file2) as f: #sintaksa za otvaranje datoteka
         for line in f:
             row = line.split(",")
+            t_exp.append(float(row[0]))
             x3_exp.append((float(row[4])-float(row[1]))/1000)
     row_start = 484 #red pocetka ispitivanja 2
     row_end = 3235 #red kraja ispitivanja 2
@@ -46,6 +46,7 @@ elif file2 == "mjerenje4_pomak_x.csv":
     with open(file2) as f: #sintaksa za otvaranje datoteka
         for line in f:
             row = line.split(",")
+            t_exp.append(float(row[0]))
             x3_exp.append((float(row[4]))/1000)
     row_start = 468 #red pocetka ispitivanja 4
     row_end = 3243 #red kraja ispitivanja 4
