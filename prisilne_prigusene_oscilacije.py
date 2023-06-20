@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 13:02:49 2023
-
-@author: petrovic, pranjic, sindicic
-"""
-
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import numpy as np
@@ -16,9 +9,8 @@ from slobodne_prigusene_oscilacije import zeta_average
 ## Troetazni problem (labos)
 # Ucitavanje podataka mjerenja iz labosa
 
-file1 = "mjerenje2_pomak_x.csv" #lokalna datoteka u radnom dokumentu
 # Mijenjanje ispitivanja (2 ili 4)
-file2 = "mjerenje2_pomak_x.csv" #lokalna datoteka u radnom dokumentu
+file = "mjerenje2_pomak_x.csv" #lokalna datoteka u radnom dokumentu
 
 t_exp = []
 xb_exp = []
@@ -26,28 +18,27 @@ x1_exp = []
 x2_exp = []
 x3_exp = []
 
-with open(file1) as f: #sintaksa za otvaranje datoteka
-    for line in f:
-        row = line.split(",")
-        xb_exp.append((float(row[1])-7)/1000)
-        x1_exp.append((float(row[2])-float(row[1]))/1000)
-        x2_exp.append((float(row[3])-float(row[1]))/1000)
-
 # Odabir podataka ovisno o ispitivanju
-if file2 == "mjerenje2_pomak_x.csv":
-    with open(file2) as f: #sintaksa za otvaranje datoteka
+if file == "mjerenje2_pomak_x.csv":
+    with open(file) as f: #sintaksa za otvaranje datoteka
         for line in f:
             row = line.split(",")
             t_exp.append(float(row[0]))
+            xb_exp.append((float(row[1])-7)/1000)
+            x1_exp.append((float(row[2])-float(row[1]))/1000)
+            x2_exp.append((float(row[3])-float(row[1]))/1000)
             x3_exp.append((float(row[4])-float(row[1]))/1000)
     row_start = 484 #red pocetka ispitivanja 2
     row_end = 3235 #red kraja ispitivanja 2
-elif file2 == "mjerenje4_pomak_x.csv":
-    with open(file2) as f: #sintaksa za otvaranje datoteka
+elif file == "mjerenje4_pomak_x.csv":
+    with open(file) as f: #sintaksa za otvaranje datoteka
         for line in f:
             row = line.split(",")
             t_exp.append(float(row[0]))
-            x3_exp.append((float(row[4]))/1000)
+            xb_exp.append((float(row[1]))/1000)
+            x1_exp.append((float(row[2])-float(row[1]))/1000)
+            x2_exp.append((float(row[3])-float(row[1]))/1000)
+            x3_exp.append((float(row[4])-float(row[1]))/1000)
     row_start = 468 #red pocetka ispitivanja 4
     row_end = 3243 #red kraja ispitivanja 4
 
@@ -98,6 +89,7 @@ x = np.zeros([3,N])
 v = np.zeros((3,N))
 a = np.zeros((3,N))
 
+# Pocetni uvjeti
 x[:,0] = x0
 v[:,0] = v0
 a[:,0] = a0
@@ -137,6 +129,6 @@ plt.title('Prisilne prigušene oscilacije')
 plt.xlabel('Vrijeme [s]')
 plt.ylabel('Pomak x [m]')
 plt.axhline(0, color='red', linestyle='--')
-plt.legend()
+plt.legend(loc ="lower right")
 plt.grid()
 plt.show()

@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 13:02:49 2023
-
-@author: petrovic, pranjic, sindicic
-"""
-
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import math
@@ -12,6 +5,7 @@ import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 from frekvencija import m,k,omega
+from frekvencija import ton1,ton2,ton3
 
 ## Troetazni problem (mjerenja)
 # Ucitavanje podataka mjerenja iz laboratorija
@@ -68,11 +62,16 @@ for i in range(len(y_max_values) - 1):
     zeta_list.append(zeta)
 
 zeta_average = sum(zeta_list)/len(zeta_list)
-omega_i = omega[0]
-omega_j = omega[1]
+omega_d = omega*(1-zeta_average**2)
+omega_i = omega_d[0]
+omega_j = omega_d[1]
 a0 = zeta_average*(2*omega_i*omega_j)/(omega_i+omega_j)
 a1 = zeta_average*(2/(omega_i + omega_j))
 c = np.dot(m,a0) + np.dot(k,a1) #matrica prigusenja
+
+# Prosječno trajanje jednog intervala
+interval = np.diff(max_indices)
+T = np.mean(interval)
 
 # Newmarkovi parametri:
 beta=1/4
@@ -94,7 +93,8 @@ x = np.zeros([3,N])
 v = np.zeros((3,N))
 a = np.zeros((3,N))
 
-x[:,0] = x0
+# Pocetni uvjeti
+x[:,0] = x0 #x0 za mjerenja; ton1,ton2,ton3 za oblik osciliranja
 v[:,0] = v0
 a[:,0] = a0
 
@@ -112,17 +112,17 @@ for i in range (1,N):
     at = np.dot(b1,(x[:,i]-x[:,i-1])) + np.dot(b2,v[:,i-1]) + np.dot(b3,a[:,i-1])
     a[:,i]=at
     t[i]=i*dt
-    
+
 # CRTANJE GRAFOVA
 # Podaci troetaznog problema (izracun)
 # plt.plot (t, x[0,:], label='Kat1(izracun)')
-# plt.plot (t, x[1,:], label='Kat2(izracun)')
-plt.plot (t, x[2,:], label='Kat3(izracun)')
+plt.plot (t, x[1,:], label='Kat2(izracun)')
+# plt.plot (t, x[2,:], label='Kat3(izracun)')
 # Podaci troetaznog problema (mjerenja)
 # plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
 # plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
-# plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
-plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
+plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
+# plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
 # plt.scatter(x_max, y_max, color='red', label='Maximum')
 # Izgled grafa
 plt.xlim([0,t_end])
@@ -130,6 +130,6 @@ plt.title('Slobodne prigušene oscilacije')
 plt.xlabel('Vrijeme [s]')
 plt.ylabel('Pomak x [m]')
 plt.axhline(0, color='red', linestyle='--')
-plt.legend()
+plt.legend(loc ="lower right")
 plt.grid()
 plt.show()

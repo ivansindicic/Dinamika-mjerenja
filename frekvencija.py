@@ -31,7 +31,7 @@ trendline_function = np.poly1d(coefficients)
 # ax.set_xlabel('Sila [N]')
 # ax.set_ylabel('Pomak [cm]')
 # ax.set_title('Sila - Pomak')
-# ax.legend()
+# ax.legend(loc ="lower right")
 # plt.plot(sila, trendline_function(sila), color='red')
 # plt.text(0.5, 5, f'y = {coefficients[0]:.2f}x + {coefficients[1]:.2f}', fontsize=12, color='red')
 # plt.show()
@@ -78,11 +78,18 @@ k = krutost * np.array([[2, -1, 0],
 
 w, v = sc.eigh(k, m)
 
-# Kružne frekvencije
+ton1 = v[:,0]
+ton2 = v[:,1]
+ton3 = v[:,2]
+
+# Prirodne frekvencije
 omega = np.sqrt(w)
 
 # Frekvencije
 f = omega/(2*math.pi)
+
+# Periodi
+T = 1/f
 
 # print('Krutost: ', f"{krutost:.1f}", 'N/m')
 # print('Matrica krutosti:')
@@ -100,7 +107,11 @@ f = omega/(2*math.pi)
 # print("w1: ", f"{omega[0]:.2f}", 'rad/s')
 # print("w2: ", f"{omega[1]:.2f}", 'rad/s')
 # print("w3: ", f"{omega[2]:.2f}", 'rad/s')
-print("Frekvencija: ")
-print("f1: ", f"{f[0]:.2f}", 'Hz')
-print("f2: ", f"{f[1]:.2f}", 'Hz')
-print("f3: ", f"{f[2]:.2f}", 'Hz')
+# print("Periodi: ")
+# print("T1: ", f"{T[0]:.2f}", 's')
+# print("T2: ", f"{T[1]:.2f}", 's')
+# print("T3: ", f"{T[2]:.2f}", 's')
+# print("Frekvencija: ")
+# print("f1: ", f"{f[0]:.2f}", 'Hz')
+# print("f2: ", f"{f[1]:.2f}", 'Hz')
+# print("f3: ", f"{f[2]:.2f}", 'Hz')
