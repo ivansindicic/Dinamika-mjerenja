@@ -8,7 +8,7 @@ slobodne prigusene oscilacije.py
 redak 20
 file = …1 ili 3… (bez ili sa dodanom masom)
 
-slobodne prigusene oscilacije.py
+prisilne prigusene oscilacije.py
 redak 21
 file2 = …2 ili 4… (bez ili sa dodanom masom)
 
