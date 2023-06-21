@@ -1,3 +1,4 @@
+# prisilne_prigusene_oscilacije.py
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import numpy as np
@@ -58,7 +59,7 @@ x3_new = x3_exp[row_start:row_end]
 
 ## Troetazni problem (izracun)
 
-# Prigusenje slobodnih oscilacija
+# Prigusenje prisilnih oscilacija
 omega_i = omega[0]
 omega_j = omega[1]
 a0 = zeta_average*(2*omega_i*omega_j)/(omega_i+omega_j)
@@ -115,13 +116,13 @@ for i in range (1,N):
 
 # CRTANJE GRAFOVA
 # Podaci troetaznog problema (izracun)
-# plt.plot (t, x[0,:], label='Kat1(izracun)')
-# plt.plot (t, x[1,:], label='Kat2(izracun)')
+plt.plot (t, x[0,:], label='Kat1(izracun)')
+plt.plot (t, x[1,:], label='Kat2(izracun)')
 plt.plot (t, x[2,:], label='Kat3(izracun)')
 # Podaci troetaznog problema (mjerenja)
-# plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
-# plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
-# plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
+plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
+plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
+plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
 plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
 # Izgled grafa
 plt.xlim([0,t_end])

@@ -1,3 +1,4 @@
+# slobodne_prigusene_oscilacije.py
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import math
@@ -114,15 +115,15 @@ for i in range (1,N):
 
 # CRTANJE GRAFOVA
 # Podaci troetaznog problema (izracun)
-# plt.plot (t, x[0,:], label='Kat1(izracun)')
+plt.plot (t, x[0,:], label='Kat1(izracun)')
 plt.plot (t, x[1,:], label='Kat2(izracun)')
-# plt.plot (t, x[2,:], label='Kat3(izracun)')
+plt.plot (t, x[2,:], label='Kat3(izracun)')
 # Podaci troetaznog problema (mjerenja)
-# plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
-# plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
+plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
+plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
 plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
-# plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
-# plt.scatter(x_max, y_max, color='red', label='Maximum')
+plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
+plt.scatter(x_max, y_max, color='red', label='Maximum')
 # Izgled grafa
 plt.xlim([0,t_end])
 plt.title('Slobodne prigušene oscilacije')

@@ -1,3 +1,4 @@
+# slobodne_neprigusene_oscilacije.py
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import numpy as np
@@ -52,8 +53,8 @@ for i in range (1,N):
 
 # CRTANJE GRAFOVA
 # Podaci troetaznog problema (izracun)
-# plt.plot (t, x[0,:], label='Kat1(izracun)')
-# plt.plot (t, x[1,:], label='Kat2(izracun)')
+plt.plot (t, x[0,:], label='Kat1(izracun)')
+plt.plot (t, x[1,:], label='Kat2(izracun)')
 plt.plot (t, x[2,:], label='Kat3(izracun)')
 # Izgled grafa
 plt.xlim([0,t_end])

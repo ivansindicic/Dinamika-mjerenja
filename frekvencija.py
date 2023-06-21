@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 19 18:18:57 2023
-
-@author: petrovic, pranjic, sindicic
-"""
-
+# frekvencija.py
 ### Analiza troetazne zgrade s razlicitim masama stropova
 
 import math
@@ -24,17 +18,17 @@ coefficients = np.polyfit(sila, pomak, 1)
 # Funkcija koja se može koristiti za predviđanje y-vrijednosti linije trenda
 trendline_function = np.poly1d(coefficients)
 
-# # CRTANJE GRAFOVA
-# fig, ax = plt.subplots()
-# plt.scatter(sila, pomak)
-# ax.plot(sila, pomak, label='Vrijednosti ispitivanja')
-# ax.set_xlabel('Sila [N]')
-# ax.set_ylabel('Pomak [cm]')
-# ax.set_title('Sila - Pomak')
-# ax.legend(loc ="lower right")
-# plt.plot(sila, trendline_function(sila), color='red')
-# plt.text(0.5, 5, f'y = {coefficients[0]:.2f}x + {coefficients[1]:.2f}', fontsize=12, color='red')
-# plt.show()
+# CRTANJE GRAFOVA
+fig, ax = plt.subplots()
+plt.scatter(sila, pomak)
+ax.plot(sila, pomak, label='Vrijednosti ispitivanja')
+ax.set_xlabel('Sila [N]')
+ax.set_ylabel('Pomak [mm]')
+ax.set_title('Sila - Pomak')
+ax.legend(loc ="lower right")
+plt.plot(sila, trendline_function(sila), color='red')
+plt.text(0.5, 5, f'y = {coefficients[0]:.2f}x + {coefficients[1]:.2f}', fontsize=12, color='red')
+plt.show()
 
 # Parametri vijka
 mv = 2.3 #masa (g)
@@ -91,27 +85,27 @@ f = omega/(2*math.pi)
 # Periodi
 T = 1/f
 
-# print('Krutost: ', f"{krutost:.1f}", 'N/m')
-# print('Matrica krutosti:')
-# print(w)
-# print("k1: ", f"{w[0]:.2f}", 'N/m')
-# print("k2: ", f"{w[1]:.2f}", 'N/m')
-# print("k3: ", f"{w[2]:.2f}", 'N/m')
-# print('Mase: ')
-# print('m1: ', f"{masa1:.4f}",'kg')
-# print('m2: ', f"{masa2:.4f}",'kg')
-# print('m3: ', f"{masa3:.4f}",'kg')
-# print('Matrica masa: ')
-# print(v)
-# print("Kružna frekvencija: ")
-# print("w1: ", f"{omega[0]:.2f}", 'rad/s')
-# print("w2: ", f"{omega[1]:.2f}", 'rad/s')
-# print("w3: ", f"{omega[2]:.2f}", 'rad/s')
-# print("Periodi: ")
-# print("T1: ", f"{T[0]:.2f}", 's')
-# print("T2: ", f"{T[1]:.2f}", 's')
-# print("T3: ", f"{T[2]:.2f}", 's')
-# print("Frekvencija: ")
-# print("f1: ", f"{f[0]:.2f}", 'Hz')
-# print("f2: ", f"{f[1]:.2f}", 'Hz')
-# print("f3: ", f"{f[2]:.2f}", 'Hz')
+print('Krutost: ', f"{krutost:.1f}", 'N/m')
+print('Matrica krutosti:')
+print(w)
+print("k1: ", f"{w[0]:.2f}", 'N/m')
+print("k2: ", f"{w[1]:.2f}", 'N/m')
+print("k3: ", f"{w[2]:.2f}", 'N/m')
+print('Mase: ')
+print('m1: ', f"{masa1:.4f}",'kg')
+print('m2: ', f"{masa2:.4f}",'kg')
+print('m3: ', f"{masa3:.4f}",'kg')
+print('Matrica masa: ')
+print(v)
+print("Kružna frekvencija: ")
+print("w1: ", f"{omega[0]:.2f}", 'rad/s')
+print("w2: ", f"{omega[1]:.2f}", 'rad/s')
+print("w3: ", f"{omega[2]:.2f}", 'rad/s')
+print("Periodi: ")
+print("T1: ", f"{T[0]:.2f}", 's')
+print("T2: ", f"{T[1]:.2f}", 's')
+print("T3: ", f"{T[2]:.2f}", 's')
+print("Frekvencija: ")
+print("f1: ", f"{f[0]:.2f}", 'Hz')
+print("f2: ", f"{f[1]:.2f}", 'Hz')
+print("f3: ", f"{f[2]:.2f}", 'Hz')
