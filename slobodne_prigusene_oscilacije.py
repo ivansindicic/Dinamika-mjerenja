@@ -45,7 +45,6 @@ x3_new = x3_exp[x3_exp.index(max(x3_exp)):]
 ## Troetazni problem (izracun)
 
 # Prigusenje slobodnih oscilacija
-x3_new = x3_exp[x3_exp.index(max(x3_exp)):]
 x3_exp_values = [value for value in x3_new if value > 0]
 x = np.arange(0, t_end, dt)
 x3_new_array = np.array(x3_new)
