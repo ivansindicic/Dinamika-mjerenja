@@ -123,7 +123,7 @@ plt.plot(t_new,xb_exp, label='Baza(mjerenja)')
 plt.plot(t_new, x1_exp, label='Kat1(mjerenja)')
 plt.plot(t_new, x2_exp, label='Kat2(mjerenja)')
 plt.plot(t_new, x3_exp, label='Kat3(mjerenja)')
-plt.scatter(x_max, y_max, color='red', label='Maximum')
+# plt.scatter(x_max, y_max, color='red', label='Maximum')
 # Izgled grafa
 plt.xlim([0,t_end])
 plt.title('Slobodne prigušene oscilacije')

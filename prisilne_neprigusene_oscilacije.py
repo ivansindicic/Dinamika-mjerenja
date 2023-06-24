@@ -1,13 +1,10 @@
-# slobodne_neprigusene_oscilacije.py
-### Analiza troetazne zgrade s razlicitim masama stropova
-
 import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 from frekvencija import m,k
 from frekvencija import ton1,ton2,ton3
-from slobodne_prigusene_oscilacije import t_end,dt,N
-from slobodne_prigusene_oscilacije import x1_new,x2_new,x3_new
+from prisilne_prigusene_oscilacije import t_end,dt,N
+from prisilne_prigusene_oscilacije import x1_exp,x2_exp,x3_exp,xb_new,e
 
 ## Troetazni problem (mjerenja)
 
@@ -21,7 +18,7 @@ b4=gama/(beta*dt)
 b5=1-(gama/beta)
 b6=dt*(1-(gama/(2*beta)))
 
-x0 = [x1_new[0], x2_new[0], x3_new[0]] # pomak
+x0 = [x1_exp[0], x2_exp[0], x3_exp[0]] #pomak
 v0 = [0, 0, 0] # brzina
 a0 = np.dot(inv(m), np.dot(k, x0)) # ubrzanje
 
@@ -40,10 +37,14 @@ a[:,0] = a0
 keff = (m*b1 + k)
 keff_inv = inv(keff)
 
+vb_new = [(xb_new[i + 1] - xb_new[i])/dt for i in range(len(xb_new)-1)]
+ab_new = [(vb_new[i + 1] - vb_new[i])/dt for i in range(len(vb_new)-1)]
+
 # Petlja kojom koracamo u vremenu i racunamo nepoznate pomake, brzine i ubrzanja u svakom trenutku:
 for i in range (1,N):
-    feff = (np.dot(m,(b1*x[:,i-1] - b2*v[:,i-1] - b3*a[:,i-1])))
-    xt = np.dot(keff_inv,feff)
+    F = -ab_new[i-2]*np.dot(m,e)
+    feff = np.transpose(F) + (np.dot(m,(b1*x[:,i-1] - b2*v[:,i-1] - b3*a[:,i-1])))
+    xt = np.dot(keff_inv,feff[0,:])
     x[:, i] = xt[:]
     vt = np.dot(b4,(x[:,i] - x[:,i-1])) + np.dot(b5,v[:,i-1]) + np.dot(b6,a[:,i-1])
     v[:,i]=vt[:]
@@ -58,7 +59,7 @@ plt.plot (t, x[1,:], label='Kat2(izracun)')
 plt.plot (t, x[2,:], label='Kat3(izracun)')
 # Izgled grafa
 plt.xlim([0,t_end])
-plt.title('Slobodne neprigušene oscilacije')
+plt.title('Prisilne neprigušene oscilacije')
 plt.xlabel('Vrijeme [s]')
 plt.ylabel('Pomak x [m]')
 plt.axhline(0, color='red', linestyle='--')
